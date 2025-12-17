@@ -108,7 +108,7 @@ image::introductions/ah.png[]
 * Andrew Harrison
 * Managing Architect, Services
 
-image::introductions/fa.jpeg[]
+image::introductions/fa.png[]
 * Flávio Andrade
 * Principal Architect
 
