@@ -91,9 +91,13 @@ Download the Ansible tarball for OpenShift Virtualization Migration Ansible Coll
 
 [source,shell]
 ----
-wget https://catalog-item-assets.s3.us-east-2.amazonaws.com/infra-openshift_virtualization_migration-1.21.1.tar.gz
-tar xf infra-openshift_virtualization_migration-1.21.1.tar.gz
-cd openshift_virtualization_migration
+$ wget https://catalog-item-assets.s3.us-east-2.amazonaws.com/infra-openshift_virtualization_migration-1.21.1.tar.gz
+
+$ mkdir openshift_virtualization_migration
+
+$ tar xf infra-openshift_virtualization_migration-1.21.1.tar.gz -C openshift_virtualization_migration
+
+$ cd openshift_virtualization_migration
 ----
 
 ### Setting Environment Variables
@@ -109,9 +113,26 @@ export OPENSHIFT_VIRTUALIZATION_MIGRATION_REPO=$(pwd)
 
 Next, set a new environment variable called `ETX_REPO` to be the location of the ETX workshop Git repository. This should be the location where you cloned the ETX workshop Git repository.
 
+Clone the repository to your  bastion VM.
+
+[source,console,subs="attributes"]
+----
+$ git clone https://github.com/rhpds/etx-virt-vma-factory-showroom etx-virt_delivery
+Cloning into 'etx-virt_delivery'...
+remote: Enumerating objects: 1300, done.
+remote: Counting objects: 100% (169/169), done.
+remote: Compressing objects: 100% (119/119), done.
+remote: Total 1300 (delta 69), reused 110 (delta 38), pack-reused 1131 (from 1)
+Receiving objects: 100% (1300/1300), 50.33 MiB | 31.68 MiB/s, done.
+Resolving deltas: 100% (412/412), done.
+
+$ cd etx-virt_delivery
+----
+
+
 [TIP]
 ====
-The *ETX Workshop Git Repository* is the repository located at link:https://github.com/rhpds/etx-virt-vma-factory-showroom[https://github.com/rhpds/etx-virt-vma-factory-showroom] which was cloned in the prior exercise relating to xref:VMs-and-gitops.adoc[GitOps and Virtual Machines].
+The *ETX Workshop Git Repository* is the repository located at link:https://github.com/rhpds/etx-virt-vma-factory-showroom[https://github.com/rhpds/etx-virt-vma-factory-showroom] which will used again in the future exercise relating to xref:VMs-and-gitops.adoc[GitOps and Virtual Machines].
 ====
 
 [source,shell]
@@ -126,7 +147,7 @@ Be sure to replace `/path/to/etx-workshop-repo` with the location that you clone
 [source,shell]
 ----
 cd /home/lab-user
-git clone https://github.com/rhpds/etx-virt-vma-factory-showroom
+git clone https://github.com/rhpds/etx-virt-vma-factory-showroom etx-virt_delivery
 cd etx-virt_delivery
 export ETX_REPO=$(pwd)
 ----
