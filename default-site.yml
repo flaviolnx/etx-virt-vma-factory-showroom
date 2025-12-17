@@ -1,7 +1,8 @@
 ---
 site:
   title: Experience Red Hat OpenShift Virtualization
-  start_page: modules::00_introductions.adoc
+  # start_page: modules::00_introductions.adoc
+  start_page: modules::index.adoc
 
 content:
   sources:
@@ -11,6 +12,13 @@ content:
 ui:
   bundle:
     url: https://github.com/rhpds/rhdp_showroom_theme/releases/download/rh-one-2025/ui-bundle.zip
+    snapshot: true
+  supplemental_files:
+    - path: ./content/supplemental-ui
+    - path: ./content/lib
+    - path: .nojekyll
+    - path: ui.yml
+      contents: "static_files: [ .nojekyll ]"
 
 runtime:
   cache_dir: ./.cache/antora
