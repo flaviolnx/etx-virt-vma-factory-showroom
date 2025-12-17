@@ -59,12 +59,22 @@ pip install ansible-navigator
 
 The Ansible for OpenShift Virtualization Migration includes an Execution Environment to support executing Ansible Automation both locally and within Ansible Automation Platform. Since an Execution Environment runs as a container image, you will need to have a container runtime, such as Podman installed and configured on your machine. Consult the link:https://podman.io[Podman website] for any additional questions.
 
+[source,shell]
+----
+sudo dnf install podman -y
+----
+
 The Execution Environment supporting the Ansible for OpenShift Virtualization Migration is located within a private Container registry. As as a result, you will need to provide credentials in order to obtain the image. Using the credentials provided, login to the remote registry:
 
 [source,shell]
 ----
 podman login quay.io/redhat-cop
 ----
+
+[NOTE]
+====
+Use your own credentials to login into quay.io
+====
 
 Pull the Execution Environment to your local machine
 
@@ -82,7 +92,7 @@ Download the Ansible tarball for OpenShift Virtualization Migration Ansible Coll
 [source,shell]
 ----
 wget https://catalog-item-assets.s3.us-east-2.amazonaws.com/infra-openshift_virtualization_migration-1.21.1.tar.gz
-tar czf infra-openshift_virtualization_migration-1.21.1.tar.gz
+tar xf infra-openshift_virtualization_migration-1.21.1.tar.gz
 cd openshift_virtualization_migration
 ----
 
