@@ -57,6 +57,7 @@ Once a Virtual Environment has been activated, the shell prompt will show the na
 pip install ansible-navigator
 ----
 
+
 The Ansible for OpenShift Virtualization Migration includes an Execution Environment to support executing Ansible Automation both locally and within Ansible Automation Platform. Since an Execution Environment runs as a container image, you will need to have a container runtime, such as Podman installed and configured on your machine. Consult the link:https://podman.io[Podman website] for any additional questions.
 
 [source,shell]
@@ -64,23 +65,34 @@ The Ansible for OpenShift Virtualization Migration includes an Execution Environ
 sudo dnf install podman -y
 ----
 
+#### Method 1
+
 The Execution Environment supporting the Ansible for OpenShift Virtualization Migration is located within a private Container registry. As as a result, you will need to provide credentials in order to obtain the image. Using the credentials provided, login to the remote registry:
 
 [source,shell]
 ----
-podman login quay.io/redhat-cop
+podman login quay.io/rhpds
 ----
 
 [NOTE]
 ====
-Use your own credentials to login into quay.io
+Use your given credentials to login into quay.io
 ====
 
 Pull the Execution Environment to your local machine
 
 [source,shell]
 ----
-podman pull quay.io/redhat-cop/openshift-virtualization-migration-ee:2.5
+podman pull quay.io/rhpds/openshift-virtualization-migration-ee:latest
+----
+
+#### Method 2 
+
+For network restriction reasons there is a tar image of the execution environment are residing into bastion lab-user home area, and you can use it locally:
+
+[source,shell]
+----
+podman load -i openshift-virtualization-migration-ee:latest.tar
 ----
 
 ### Source Code
@@ -100,11 +112,34 @@ $ tar xf infra-openshift_virtualization_migration-1.21.1.tar.gz -C openshift_vir
 $ cd openshift_virtualization_migration
 ----
 
+Now you need to create your git environment to receive the playbook contents to use it with Ansible Automation Platform:
+
+login into your gitea https://gitea.apps.cluster-{GUID}.dynamic.redhatworkshops.io 
+
+image::Ansible-Migration-Install/gitea-login.png[link=self, window=blank, width=100%]
+
+Create a repo called *openshift_virtualization_migration* on gitea
+
+image::Ansible-Migration-Install/gitea-create-repo.png[link=self, window=blank, width=100%]
+
+
+[source,shell]
+----
+git init
+git checkout -b main
+git add .
+git commit -m "first commit"
+git remote add origin https://gitea.apps.cluster-{GUID}.dynamic.redhatworkshops.io/user1/openshift_virtualization_migration.git
+git push -u origin main
+----
+
+
+
 ### Setting Environment Variables
 
 Since multiple repositories (ETX workshop and Ansible for OpenShift Virtualization Migration) are being used within this exercise, it is recommended that several environment variables be set which will simplify the process of referencing files and directories for the remainder of this exercise.
 
-First set a new environment variable called `OPENSHIFT_VIRTUALIZATION_MIGRATION_REPO` to be the current working directory which should be the root of the cloned Ansible for OpenShift Virtualization Migration Git repository.
+First set a new environment variable called `OPENSHIFT_VIRTUALIZATION_MIGRATION_REPO` to be the current working directory which should be the root of the your Ansible for OpenShift Virtualization Migration Git repository.
 
 [source,shell]
 ----
