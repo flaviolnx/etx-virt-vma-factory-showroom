@@ -78,7 +78,7 @@ reg query "HKLM\SOFTWARE\Microsoft\Net Framework Setup\NDP" /s
 
 [start=2]
 . Download RVTools
-* Visit https://www.robware.net/download[RVTools Download] and download the RVTools MSI package.
+* Visit https://downloads.dell.com/rvtools/rvtools4.7.1.msi?hve=Download+RVTools[RVTools Download] and download the RVTools MSI package.
 
 [start=3]
 . Install RVTools
