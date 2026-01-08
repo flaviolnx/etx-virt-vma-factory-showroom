@@ -122,6 +122,9 @@ Create a repo called *openshift_virtualization_migration* on gitea
 
 image::Ansible-Migration-Install/gitea-create-repo.png[link=self, window=blank, width=100%]
 
+image::Ansible-Migration-Install/gitea-create-repo-II.png[link=self, window=blank, width=100%]
+
+image::Ansible-Migration-Install/gitea-create-repo-III.png[link=self, window=blank, width=100%]
 
 [source,shell]
 ----
