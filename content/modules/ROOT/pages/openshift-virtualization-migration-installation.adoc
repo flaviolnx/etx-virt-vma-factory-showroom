@@ -65,34 +65,16 @@ The Ansible for OpenShift Virtualization Migration includes an Execution Environ
 sudo dnf install podman -y
 ----
 
-#### Method 1
+For your commodity the container image already been deployed into your bastion.
 
-The Execution Environment supporting the Ansible for OpenShift Virtualization Migration is located within a private Container registry. As as a result, you will need to provide credentials in order to obtain the image. Using the credentials provided, login to the remote registry:
-
-[source,shell]
-----
-podman login quay.io/rhpds
-----
-
-[NOTE]
-====
-Use your given credentials to login into quay.io
-====
-
-Pull the Execution Environment to your local machine
+To see the image use:
 
 [source,shell]
 ----
-podman pull quay.io/rhpds/openshift-virtualization-migration-ee:latest
-----
+podman image list
 
-#### Method 2 
-
-For network restriction reasons there is a tar image of the execution environment are residing into bastion lab-user home area, and you can use it locally:
-
-[source,shell]
-----
-podman load -i openshift-virtualization-migration-ee:latest.tar
+REPOSITORY                                               TAG         IMAGE ID      CREATED       SIZE
+quay.io/rhpds/openshift-virtualization-migration-ee-2.5  v9          724ea6e8252e  4 months ago  1.08 GB
 ----
 
 ### Source Code
@@ -139,6 +121,8 @@ git push -u origin main
 
 
 ### Setting Environment Variables
+
+IMPORTANT:  The complete respository zip file is already deployed into your home area.
 
 Since multiple repositories (ETX workshop and Ansible for OpenShift Virtualization Migration) are being used within this exercise, it is recommended that several environment variables be set which will simplify the process of referencing files and directories for the remainder of this exercise.
 
