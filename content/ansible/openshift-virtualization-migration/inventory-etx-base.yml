@@ -21,13 +21,13 @@ all:
     controller_validate_certs: false
 
     # Git Repository Details
-    aap_project_repo: https://giteaapps.cluster-{UUID}.dynamic.redhatworkshops.io/user1/openshift_virtualization_migration.git
+    aap_project_repo: https://gitea.apps.cluster-{GUID}.dynamic.redhatworkshops.io/<YOUR USER>/openshift_virtualization_migration.git
     aap_project_branch: main
 
     # Execution Environment Details
     container_host: quay.io/redhat-cop
     aap_execution_environment: OpenShift Virtualization Migration
-    aap_execution_environment_image: quay.io/rhpds/openshift-virtualization-migration-ee:latest
+    aap_execution_environment_image: quay.io/rhpds/openshift-virtualization-migration-ee:v9
 
     # Automation Hub Configurations. These are not utilized within the workshop, but still needs to be defined
     automation_hub_certified_url: https://cloud.redhat.com/api/automation-hub/content/published/
