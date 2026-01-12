@@ -60,6 +60,9 @@ pip install ansible-navigator
 
 The Ansible for OpenShift Virtualization Migration includes an Execution Environment to support executing Ansible Automation both locally and within Ansible Automation Platform. Since an Execution Environment runs as a container image, you will need to have a container runtime, such as Podman installed and configured on your machine. Consult the link:https://podman.io[Podman website] for any additional questions.
 
+NOTE: 
+Podman is already installed on your system, on real scenario do the following command.
+
 [source,shell]
 ----
 sudo dnf install podman -y
@@ -96,7 +99,9 @@ $ cd openshift_virtualization_migration
 
 Now you need to create your git environment to receive the playbook contents to use it with Ansible Automation Platform:
 
-login into your gitea https://gitea.apps.cluster-{GUID}.dynamic.redhatworkshops.io 
+login into your gitea https://gitea.apps.{openshift_cluster_ingress_domain}
+
+IMPORTANT: If you do not have user, you can register one with your email and password.
 
 image::Ansible-Migration-Install/gitea-login.png[link=self, window=blank, width=100%]
 
@@ -108,16 +113,17 @@ image::Ansible-Migration-Install/gitea-create-repo-II.png[link=self, window=blan
 
 image::Ansible-Migration-Install/gitea-create-repo-III.png[link=self, window=blank, width=100%]
 
+GUID: {GUID}
+
 [source,shell]
 ----
 git init
 git checkout -b main
 git add .
 git commit -m "first commit"
-git remote add origin https://gitea.apps.cluster-{GUID}.dynamic.redhatworkshops.io/user1/openshift_virtualization_migration.git
+git remote add origin https://gitea.apps.{openshift_cluster_ingress_domain}/<YOUR GIT USER>/openshift_vi
 git push -u origin main
 ----
-
 
 
 ### Setting Environment Variables
@@ -273,13 +279,15 @@ Also included in the ETX Git repository in the `content/ansible/openshift-virtua
 cp $ETX_REPO/content/ansible/openshift-virtualization-migration/inventory-etx.yml $OPENSHIFT_VIRTUALIZATION_MIGRATION_REPO/inventory-etx.yml
 ----
 
-There are several methods for which Ansible Automation Platform can be subscribed, including using a Service Account from the Red Hat Hybrid Cloud Console or a Subscription manifest. For this workshop, you will make use of a Subscription manifest that provides the necessary entitlements for the target Ansible Automation Platform. Download the manifest file to your local machine from the location provided by the instructors.
+There are several methods for which Ansible Automation Platform can be subscribed, including using a Service Account from the Red Hat Hybrid Cloud Console or a Subscription manifest. For this workshop, you will make use of a Subscription manifest that provides the necessary entitlements for the target Ansible Automation Platform.
 
-If you're using the bastion machine provided by the RHDP deployment as your instance, download the manifest file provided to the root of your OpenShift Virtualization Migration Git repository. 
+NOTE: There is a manifest on the base of directory of $EXT_REPO
+
+If you're *not* using the bastion machine provided by the RHDP deployment as your instance, download the manifest file provided to the root of your OpenShift Virtualization Migration Git repository. 
 
 [source,shell]
 ----
-curl -L -o $OPENSHIFT_VIRTUALIZATION_MIGRATION_REPO/aap-manifest.zip <URL_TO_MANIFEST>
+curl -L -o $OPENSHIFT_VIRTUALIZATION_MIGRATION_REPO/aap-manifest.zip https://github.com/rhpds/etx-virt-vma-factory-showroom/blob/main/aap-manifests.zip
 ----
 
 The next section will describe the changes that you will need to make in order to properly deploy the Ansible for OpenShift Virtualization Migration within your OpenShift environment.
