@@ -1,8 +1,7 @@
 :scrollbar:
-:toc2:
 :numbered:
 
-== But wait, there's more!
+= Thank You and Next Steps
 
 Depending on your role and interests, you might be interested in completing some of the additional modules for this workshop:
 
