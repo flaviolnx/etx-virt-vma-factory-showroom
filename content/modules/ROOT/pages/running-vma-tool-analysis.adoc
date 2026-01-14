@@ -3,7 +3,6 @@
 :numbered:
 :imagesdir: ../assets/images/
 
-
 = VMA Analysis Guide
 
 == Summary
@@ -29,15 +28,15 @@ This tool provides a comprehensive snapshot of the vSphere infrastructure, offer
 
 Assessing your vSphere environment with RVTools is a great way to gather insights into your virtual infrastructure, helping organizations optimize resource allocation, identify potential risks, and plan migrations effectively.
 
-image::running_vma_tool_analysis/rvtools.png[scaledwidth=100%]
+image::running_vma_tool_analysis/rvtools.png[title="", link=self, window=blank, width=100%]
 
 === Enhancing Analysis with VMA-ANALYSIS Jupyter Notebook
 
 While RVTools provides raw data exports, deeper analysis and visualization require additional processing. The VMA-ANALYSIS Jupyter Notebook was designed to bridge this gap by analyzing RVTools-generated reports and providing a structured, interactive approach to data interpretation.
 
-This notebook parses RVTools exports to extract critical VM attributes, evaluates migration feasibility, and generates detailed reports and visualizations. By leveraging NumPy and Pandas, it performs advanced data manipulation, filtering, and calculations, allowing Red Hatters tasked to conduct VMA's to assess workload distribution, migration complexity, and infrastructure details.
+This notebook parses RVTools exports to extract critical VM attributes, evaluates migration feasibility, and generates detailed reports and visualizations. By leveraging NumPy and Pandas, it performs advanced data manipulation, filtering, and calculations, allowing Red Hatters tasked to conduct VMAs to assess workload distribution, migration complexity, and infrastructure details.
 
-image::running_vma_tool_analysis/vma-analysis.png[scaledwidth=50%]
+image::running_vma_tool_analysis/vma-analysis.png[title="", link=self, window=blank, width=100%]
 
 .Key Features and Benefits
 * Comprehensive Inventory Collection:
@@ -84,7 +83,7 @@ reg query "HKLM\SOFTWARE\Microsoft\Net Framework Setup\NDP" /s
 . Install RVTools
 ** Double-click the MSI package and follow the installation prompts.
 
-image::running_vma_tool_analysis/install.png[scaledwidth=50%]
+image::running_vma_tool_analysis/install.png[title="", link=self, window=blank, width=100%]
 
 [start=4]
 . Launch RVTools
@@ -93,7 +92,7 @@ image::running_vma_tool_analysis/install.png[scaledwidth=50%]
 . Connect to vSphere
 * In the RVTools login interface, enter the IP address or DNS of your vCenter Server or ESXi host, along with your credentials, then click Login.
 
-image::running_vma_tool_analysis/running_rvtools.png[scaledwidth=50%]
+image::running_vma_tool_analysis/running_rvtools.png[title="", link=self, window=blank, width=100%]
 
 === Usage
 
@@ -101,27 +100,27 @@ image::running_vma_tool_analysis/running_rvtools.png[scaledwidth=50%]
 * Upon launching RVTools, the vInfo tab opens by default, displaying detailed information about virtual machines (VMs) in your vSphere environment.
 * This includes key details such as power state, resource allocation, and fault tolerance configuration.
 
-image::running_vma_tool_analysis/vinfo.png[scaledwidth=50%]
+image::running_vma_tool_analysis/vinfo.png[title="", link=self, window=blank, width=100%]
 
 [start=4]
 . Navigate Through Tabs and Data
 * Use the dropdown menus at the top to access different data categories.
 * For example, selecting "Switch" from the ESX dropdown menu will take you to the vSwitch tab, where network configurations are displayed.
 
-image::running_vma_tool_analysis/menus.png[scaledwidth=50%]
+image::running_vma_tool_analysis/menus.png[title="", link=self, window=blank, width=100%]
 
 [start=4]
 . Access Documentation for Field Descriptions
 * RVTools provides extensive documentation to explain each field.
 * To access it, go to Help > Documentation, where you can review a 144-page guide detailing all collected data points.
 
-image::running_vma_tool_analysis/documentation.png[scaledwidth=50%]
+image::running_vma_tool_analysis/documentation.png[title="", link=self, window=blank, width=100%]
 
 [start=5]
 . Exporting Data
 * Select "File" then "Export all to Excel"
 
-image::running_vma_tool_analysis/export.png[scaledwidth=50%]
+image::running_vma_tool_analysis/export.png[title="", link=self, window=blank, width=100%]
 
 [start=4]
 * or using CLI
@@ -264,14 +263,14 @@ _Windows_
 * Follow the instructions inside the file.
 * Remove sample entries before proceeding.
 
-image::running_vma_tool_analysis/index_template_spreadsheet.png[scaledwidth=100%]
+image::running_vma_tool_analysis/index_template_spreadsheet.png[title="", link=self, window=blank, width=100%]
 
 [start=4]
 . Verify Exported Worksheets
 * Ensure the exported RVTools spreadsheets contain the default set of worksheets.
 * The worksheets highlighted in yellow in the following image are mandatory for analysis
 
-image::running_vma_tool_analysis/rvtools-exported-worksheets.png[scaledwidth=100%]
+image::running_vma_tool_analysis/rvtools-exported-worksheets.png[title="", link=self, window=blank, width=100%]
 
 These sheets must be present with the exact spelling as shown.
 
@@ -310,7 +309,7 @@ These scripts automate the setup process by creating and activating the virtual 
 
 [TIP]
 ====
-If you deployed the rvtool analysis tool in your bastion node, you could access it by forwarding the port using the following command: 
+If you deployed the rvtool analysis tool in your bastion node, you could access it by forwarding the port using the following command:
 
 [source, shell]
 ----
@@ -318,7 +317,7 @@ ssh -L 8888:localhost:8888 lab-user@<bastion-node> -p <port>
 ----
 ====
 
-image::running_vma_tool_analysis/jupyter-notebook.png[scaledwidth=100%]
+image::running_vma_tool_analysis/jupyter-notebook.png[title="", link=self, window=blank, width=100%]
 
 [start=4]
 . Select the Notebook
@@ -332,7 +331,7 @@ image::running_vma_tool_analysis/jupyter-notebook.png[scaledwidth=100%]
 * Run all the cells in sequence.
 ** The execution should take 60-90+ seconds, depending on the number of vCenter inventory files being processed.
 
-image::running_vma_tool_analysis/run-the-jupyter-notebook.png[scaledwidth=100%]
+image::running_vma_tool_analysis/run-the-jupyter-notebook.png[title="", link=self, window=blank, width=100%]
 
 [WARNING]
 ====
@@ -344,38 +343,38 @@ Set nrows to the total number of files + 1 (to account for the header row in the
 
 === Interpreting the Data
 
-Once the RVTools data has been processed using the VMA-ANALYSIS Jupyter Notebook, the resulting insights will help in understanding the virtual infrastructure and planning migration strategies. 
+Once the RVTools data has been processed using the VMA-ANALYSIS Jupyter Notebook, the resulting insights will help in understanding the virtual infrastructure and planning migration strategies.
 
 .The analysis will provide:
 
 . Data Ingestion Verification
 
-image::running_vma_tool_analysis/data_ingestion.png[scaledwidth=100%]
+image::running_vma_tool_analysis/data_ingestion.png[title="", link=self, window=blank, width=100%]
 
 [start=2]
 . Distribution of VMs per vCenter
 
-image::running_vma_tool_analysis/vm_per_vcenter.png[scaledwidth=100%]
+image::running_vma_tool_analysis/vm_per_vcenter.png[title="", link=self, window=blank, width=100%]
 
 [start=3]
 . Insights on resource utilization (for AEs love this info)
 
-image::running_vma_tool_analysis/consolidated_view.png[scaledwidth=100%]
+image::running_vma_tool_analysis/consolidated_view.png[title="", link=self, window=blank, width=100%]
 
 [start=4]
 . VM / Host Scope Summary
 
-image::running_vma_tool_analysis/scope_summary.png[scaledwidth=100%]
+image::running_vma_tool_analysis/scope_summary.png[title="", link=self, window=blank, width=100%]
 
 [start=5]
 . Host Model Summary
 
-image::running_vma_tool_analysis/host_model.png[scaledwidth=100%]
+image::running_vma_tool_analysis/host_model.png[title="", link=self, window=blank, width=100%]
 
 [start=6]
 . Disk Usage Summary
 
-image::running_vma_tool_analysis/disk_summary.png[scaledwidth=100%]
+image::running_vma_tool_analysis/disk_summary.png[title="", link=self, window=blank, width=100%]
 
 [start=7]
 . Supported vs NonSupported OSes
@@ -383,9 +382,9 @@ image::running_vma_tool_analysis/disk_summary.png[scaledwidth=100%]
 [start=8]
 . Estimated Migration Time
 
-image::running_vma_tool_analysis/migration.png[scaledwidth=100%]
+image::running_vma_tool_analysis/migration.png[title="", link=self, window=blank, width=100%]
 
 [start=9]
 . and much, much more...
 
-Please feel free to explore the notebook and its outputs to gain a deeper understanding of the vSphere environment and contribute to the tool if possible. 
+Please feel free to explore the notebook and its outputs to gain a deeper understanding of the vSphere environment and contribute to the tool if possible.
