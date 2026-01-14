@@ -1,4 +1,4 @@
-= Virtualization VMA Super LAB: Introductions
+= Introductions
 
 ////
 == Navigation
