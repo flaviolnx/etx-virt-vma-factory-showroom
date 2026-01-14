@@ -3,12 +3,7 @@
 == Navigation
 
 * Modules
-** xref:00_introductions.adoc[Introductions & Bootcamp Agenda]
-//** xref:03_ocpv_basics.adoc[Module Lab: OpenShift Virtualization Basics]
-//** xref:module-03.adoc[Network Management]
-//** xref:module-02.adoc[Storage Management]
-//** xref:module-04.adoc[Introduction to Virtual Machine Customization]
-//** xref:VMs-and-gitops.adoc[GitOps and Virtual Machines]
+** xref:00_introductions.adoc[Introductions & Agenda]
 ** xref:running-vma-tool-analysis.adoc[Running VMA Tool Analysis]
 ** xref:openshift-virtualization-migration-installation.adoc[OpenShift Virtualization Migration Installation]
 ** xref:preparing-for-migrations.adoc[Preparing for Migrations]
@@ -16,10 +11,10 @@
 ** xref:running-a-customized-migration.adoc[Running a Customized Migration]
 * Extra mile
 ** xref:VMs-and-gitops.adoc[GitOps and Virtual Machines]
-//** xref:24_presales.adoc[Module: Pre Sales Resources]
 * xref:04_thanks.adoc[Thank you and next steps]
 
-== Environment Variables 
+////
+== Environment Variables
 
 [horizontal]
 Bastion Node Public Hostname:: {bastion_public_hostname}
@@ -32,13 +27,14 @@ OpenShift Cluster Admin Password:: {openshift_cluster_admin_password}
 OpenShift Admin Username:: {openshift_cluster_admin_username}
 OpenShift Console URL:: {openshift_cluster_console_url}
 OpenShift Cluster User:: {openshift_cluster_user_base}
+////
 
 
 == Agenda
 
 == Lab Overview
 
-* Agenda: 
+* Agenda:
 
 ** Welcome and Introductions
 *** Virtualization migration Assessment
@@ -56,11 +52,11 @@ OpenShift Cluster User:: {openshift_cluster_user_base}
 *** Define integrations
 *** Understand day-2 operations
 *** Propose a high-level design
-*** Generate roadmap 
+*** Generate roadmap
 
 ** Performing VMA Analysis
 
-*** Lab (running-vma-tool-analysis.adoc): Running VMA Tool Analysis
+*** Running VMA Tool Analysis
 
 ** Virtualization Migration Factory
 
@@ -68,19 +64,19 @@ OpenShift Cluster User:: {openshift_cluster_user_base}
 *** Deep Dive on the Ansible for OpenShift Virtualization Migration offering: OpenShift Virtualization Ansible for OpenShift Virtualization Migration Collection
 
 *** Install and configure AAP
-**** Install the operator 
-**** Configure AAP instance 
+**** Install the operator
+**** Configure AAP instance
 **** Load Ansible collection
 
-*** Configure Migration Playbooks 
-**** Configure providers 
+*** Configure Migration Playbooks
+**** Configure providers
 **** Configure mappings
 
 *** Test migrations lab
 **** Migrate Windows Virtual machine with Windows (multi-disk, multi-network)
 
-*** Doing post-migration hooks 
-**** Lab: Change MAC Address while preserving an IP as part of a migration 
+*** Doing post-migration hooks
+**** Lab: Change MAC Address while preserving an IP as part of a migration
 
 *** Migration in batches Lab
 **** Migration of multiple machines with automation
@@ -169,6 +165,3 @@ link:https://docs.google.com/document/d/177hXVSm1hSwG4tvCQ_jx1Cg2RwSjTe4yMVqLx0k
 link:https://docs.google.com/document/d/1-sm-mjAyYezDGd0ZgbjZFcur8Tf1J2vezHNBVGYwb68/edit?usp=sharing[Technical OpenShift Virt Discovery Questions]
 
 link:https://docs.google.com/spreadsheets/d/1i7e57sZVfju87Zw32lyyv1cWLN0fvP5FJW2qZlVMwoE/edit#gid=0[Resource Master]
-
-
-
