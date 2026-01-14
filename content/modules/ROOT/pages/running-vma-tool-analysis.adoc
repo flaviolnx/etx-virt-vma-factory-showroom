@@ -1,7 +1,7 @@
 :scrollbar:
-:toc2:
 :numbered:
 :imagesdir: ../assets/images/
+//:toc2:
 
 = VMA Analysis Guide
 
