@@ -1,4 +1,4 @@
-# VMs and GitOps
+= Bonus Round: VMs and GitOps
 
 In this exercise we will create VMs and pods using OpenShift GitOps. We will also configure a network policy to control the traffic between the VM and the pod.
 
@@ -7,7 +7,7 @@ In this exercise we will create VMs and pods using OpenShift GitOps. We will als
 Many of the commands in this module use variable substitutions, which will identified by curly braces.
 ====
 
-## Clone the GitOps repository
+== Clone the GitOps repository
 
 To run this exercise we need to clone the course git repo.
 The course git repo is located at `https://github.com/rhpds/etx-virt-vma-factory-showroom`.
@@ -28,7 +28,7 @@ Resolving deltas: 100% (412/412), done.
 $ cd etx-virt_delivery
 ----
 
-## Install the OpenShift GitOps Operator
+== Install the OpenShift GitOps Operator
 
 This Openshift environment does not have Argo CD already deployed. So we have to deploy it.
 Run the following commands on your bastion VM.
@@ -62,7 +62,7 @@ When prompted to authorize access, click on *Allow selected permissions*.  The A
 
 image::VMs-and-gitops/argocd-console.png[link=self, window=blank, width=100%]
 
-## Deploy the Argo CD Instance
+== Deploy the Argo CD Instance
 
 Let's deploy the Argo CD instance. In this case we are going to deploy the default Argo CD instance, but in a real world scenario , you might have to design for multitenancy, in which case you might end up needing more than one instance. Run the following commands.
 
@@ -86,7 +86,7 @@ group.user.openshift.io/cluster-admins created
 
 // image::VMs-and-gitops/argocd-instance.png[link=self, window=blank, width=100%]
 
-## Deploy the gitops root Application
+== Deploy the gitops root Application
 
 We are going to deploy two applications in the same namespace: one VM and one pod. The pod will be able to talk to the VM, but the VM will not be able to talk to the pod.
 
@@ -108,7 +108,7 @@ In the ArgoCD console, verify that the two child applications have been correctl
 
 image::VMs-and-gitops/appset-working.png[link=self, window=blank, width=100%]
 
-## Verify the deployed applications and traffic policies
+== Verify the deployed applications and traffic policies
 
 Examine the network policies that were created
 
@@ -176,7 +176,7 @@ $ curl -v http://{replace_with nginx_ip}:8080
 
 No output should be returned.
 
-### Using FQDNs of the Kubernetes services
+=== Using FQDNs of the Kubernetes services
 
 In this example, one can also use the K8s services' fully qualified domain names instead of omitting name resolution by using explicitely the IP addresses.
 
@@ -224,4 +224,3 @@ To verify you can reach it via route, run:
 ```bash
 curl -s https://${nginx_route_host}
 ```
-
