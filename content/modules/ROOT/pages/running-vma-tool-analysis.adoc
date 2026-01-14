@@ -61,74 +61,70 @@ By combining RVTools’ data extraction with the VMA-ANALYSIS Jupyter Notebook�
 
 RVTools is compatible with any version of Windows, provided that .NET Framework is greater or equal to 4.7.2 installed (you can download it from the official Microsoft website). The tool does not have specific operating system requirements beyond this, making it highly flexible and easy to deploy across different Windows environments.
 
-[NOTE]
+[ATTENTION]
 ====
-This section is for reference only and can be skipped. We have already provided four pre-generated RVTools files (Section 3.3) for analysis, allowing you to proceed directly to VMA ANALYSIS Tool (Section 4) for processing and interpretation without needing to extract data from vSphere manually. However, you may review this section if you wish to understand the data extraction process in more detail.
+*This section is for reference only and can be skipped. We have already provided four pre-generated RVTools files (Section 3.3) for analysis, allowing you to proceed directly to VMA ANALYSIS Tool (Section 4) for processing and interpretation without needing to extract data from vSphere manually. However, you may review this section if you wish to understand the data extraction process in more detail.*
 ====
 
 === Installing
 
 . Verify .NET Framework
-* Ensure your Windows system has .NET Framework >= 4.7.2 installed.
-** On the Windows terminal run
-
-[source, shell]
+.. Ensure your Windows system has .NET Framework >= 4.7.2 installed.
+.. On the Windows terminal run
++
+[source,sh]
+----
 reg query "HKLM\SOFTWARE\Microsoft\Net Framework Setup\NDP" /s
-
-[start=2]
+----
++
 . Download RVTools
-* Visit https://downloads.dell.com/rvtools/rvtools4.7.1.msi?hve=Download+RVTools[RVTools Download] and download the RVTools MSI package.
-
-[start=3]
+.. Visit https://downloads.dell.com/rvtools/rvtools4.7.1.msi?hve=Download+RVTools[RVTools Download] and download the RVTools MSI package.
++
 . Install RVTools
-** Double-click the MSI package and follow the installation prompts.
-
+.. Double-click the MSI package and follow the installation prompts.
++
 image::running_vma_tool_analysis/install.png[title="", link=self, window=blank, width=100%]
-
-[start=4]
++
 . Launch RVTools
-* Open the Start menu, type RVTools, and press Enter.
-
-. Connect to vSphere
-* In the RVTools login interface, enter the IP address or DNS of your vCenter Server or ESXi host, along with your credentials, then click Login.
-
+.. Open the Start menu, type RVTools, and press Enter.
+.. Connect to vSphere
+.. In the RVTools login interface, enter the IP address or DNS of your vCenter Server or ESXi host, along with your credentials, then click Login.
++
 image::running_vma_tool_analysis/running_rvtools.png[title="", link=self, window=blank, width=100%]
 
 === Usage
 
 . View VM Inventory
-* Upon launching RVTools, the vInfo tab opens by default, displaying detailed information about virtual machines (VMs) in your vSphere environment.
-* This includes key details such as power state, resource allocation, and fault tolerance configuration.
-
+.. Upon launching RVTools, the vInfo tab opens by default, displaying detailed information about virtual machines (VMs) in your vSphere environment.
+.. This includes key details such as power state, resource allocation, and fault tolerance configuration.
++
 image::running_vma_tool_analysis/vinfo.png[title="", link=self, window=blank, width=100%]
-
-[start=4]
++
 . Navigate Through Tabs and Data
-* Use the dropdown menus at the top to access different data categories.
-* For example, selecting "Switch" from the ESX dropdown menu will take you to the vSwitch tab, where network configurations are displayed.
-
+.. Use the dropdown menus at the top to access different data categories.
+.. For example, selecting "Switch" from the ESX dropdown menu will take you to the vSwitch tab, where network configurations are displayed.
++
 image::running_vma_tool_analysis/menus.png[title="", link=self, window=blank, width=100%]
-
-[start=4]
++
 . Access Documentation for Field Descriptions
-* RVTools provides extensive documentation to explain each field.
-* To access it, go to Help > Documentation, where you can review a 144-page guide detailing all collected data points.
-
+.. RVTools provides extensive documentation to explain each field.
+.. To access it, go to Help > Documentation, where you can review a 144-page guide detailing all collected data points.
++
 image::running_vma_tool_analysis/documentation.png[title="", link=self, window=blank, width=100%]
-
-[start=5]
++
 . Exporting Data
-* Select "File" then "Export all to Excel"
-
+.. Select "File" then "Export all to Excel"
++
 image::running_vma_tool_analysis/export.png[title="", link=self, window=blank, width=100%]
-
-[start=4]
-* or using CLI
-
++
+.. or using CLI +
+`RVTools -passthroughAuth -s <virtualcenter> -c ExportAll2xlsx -d <directory> –f <filename>`
++
+.Example
 [source,shell]
-RVTools -passthroughAuth -s <virtualcenter> -c ExportAll2xlsx -d <directory> –f <filename>
-Example:
+----
 RVTools –passthroughAuth –s vc5.robware.local -c ExportAll2xlsx -d c:\temp –f mytest.xlsx
+----
 
 === Provided RVTools Data
 
@@ -177,108 +173,139 @@ If you are a Red Hatter, please check the latest version of the tool in the foll
 ====
 
 . Clone the Repository
-
-  git clone https://github.com/rhpds/etx-virt-vma-factory-showroom.git
-
++
+[source, shell]
+----
+git clone https://github.com/rhpds/etx-virt-vma-factory-showroom.git
+----
++
 . Navigate to the Project Directory
-
++
+[source, shell]
+----
   cd vma-rvtools-analysis
-
+----
++
 . Set Up the Python Virtual Environment
-
-.Automated Way
+.. Automated Way
++
 A shell script (setup.sh) for Linux/macOS and a batch file (startanalyzer.bat) for Windows are included to automate the setup as well as launch the VMA ANALYSIS Jupyter notebook
-
++
 _Linux/macOS_
-
++
 [source, shell]
- ./setup.sh
-
+----
+./setup.sh
+----
++
 _Windows_
-
++
 [source, shell]
+----
 startanalyzer.bat
-
-.Manual Way
+----
++
+.. Manual Way
++
 If you prefer to set up the environment manually, follow these steps
-
-_Linux/macOS_
-
-* Create a virtual environment inside the project's root directory
-
-  python3 -m venv .venv
-
-* Activate the virtual environment
-
-  source .venv/bin/activate
-
-* Upgrade pip to the latest version
-
-  .venv/bin/pip install --upgrade pip
-
-* Install Dependencies
-
-  .venv/bin/pip install -r requirements.txt
-
-_Windows_
-
-* Create a virtual environment
-
-  python -m venv .venv
-
-* Add the virtual environment scripts to your system path
-
-  set PATH=%USERPROFILE%\mywork\rvtools-virt-analysis\.venv\Scripts;%PATH%
-
-* Activate the virtual environment
-
-  .venv\Scripts\activate
-
-* Upgrade pip to the latest version
-
-  .venv\Scripts\pip.exe install --upgrade pip
-
-* Install Dependencies
-
-  .venv\Scripts\pip.exe install -r requirements.txt
-
++
+... _Linux/macOS_
++
+.... Create a virtual environment inside the project's root directory
++
+[source, shell]
+----
+python3 -m venv .venv
+----
++
+.... Activate the virtual environment
++
+[source, shell]
+----
+source .venv/bin/activate
+----
++
+.... Upgrade pip to the latest version
++
+[source, shell]
+----
+.venv/bin/pip install --upgrade pip
+----
++
+.... Install Dependencies
++
+[source, shell]
+----
+.venv/bin/pip install -r requirements.txt
+----
++
+... _Windows_
++
+....  Create a virtual environment
++
+[source, shell]
+----
+python -m venv .venv
+----
++
+.... Add the virtual environment scripts to your system path
++
+[source, shell]
+----
+set PATH=%USERPROFILE%\mywork\rvtools-virt-analysis\.venv\Scripts;%PATH%
+----
++
+.... Activate the virtual environment
++
+[source, shell]
+----
+.venv\Scripts\activate
+----
++
+.... Upgrade pip to the latest version
++
+[source, shell]
+----
+.venv\Scripts\pip.exe install --upgrade pip
+----
++
+.... Install Dependencies
++
+[source, shell]
+----
+.venv\Scripts\pip.exe install -r requirements.txt
+----
++
 [NOTE]
 ====
 * The commands above create a hidden .venv directory inside the project.
 * Unless you add .venv/bin (Linux/macOS) or .venv\Scripts (Windows) to your system path, you will need to specify the full path when using pip or python.
 ====
 
-
 === Preparing the Data
 
 . Copy Exported Spreadsheets
-* Copy the example RVTools files from `example_rvtools_files` into the `data` directory
-
-[start=2]
+.. Copy the example RVTools files from `example_rvtools_files` into the `data` directory
 . Create an Index File
-* Copy the file `_index_template.xlsx_` and rename it to `_index.xlsx_` inside the `data` directory.
-
-[start=3]
+.. Copy the file `_index_template.xlsx_` and rename it to `_index.xlsx_` inside the `data` directory.
 . Update index.xlsx
-* Follow the instructions inside the file.
-* Remove sample entries before proceeding.
-
+.. Follow the instructions inside the file.
+.. Remove sample entries before proceeding.
++
 image::running_vma_tool_analysis/index_template_spreadsheet.png[title="", link=self, window=blank, width=100%]
-
-[start=4]
++
 . Verify Exported Worksheets
-* Ensure the exported RVTools spreadsheets contain the default set of worksheets.
-* The worksheets highlighted in yellow in the following image are mandatory for analysis
-
+.. Ensure the exported RVTools spreadsheets contain the default set of worksheets.
+.. The worksheets highlighted in yellow in the following image are mandatory for analysis
++
 image::running_vma_tool_analysis/rvtools-exported-worksheets.png[title="", link=self, window=blank, width=100%]
-
++
 These sheets must be present with the exact spelling as shown.
-
-[start=5]
++
 . Ensure Correct File Naming
-* The exported spreadsheet filenames (excluding the file extension .xlsx) must match the corresponding vCenter instance names.
-** If the vCenter instance is named `vcenterinstance123`, the exported file should be named: `vcenterinstance123.xlsx`
-
+.. The exported spreadsheet filenames (excluding the file extension .xlsx) must match the corresponding vCenter instance names.
+... If the vCenter instance is named `vcenterinstance123`, the exported file should be named: `vcenterinstance123.xlsx`
++
 [NOTE]
 ====
 All RVTools export files must be in lowercase, including both the filenames and the corresponding names referenced in `index.xlsx`.
@@ -294,19 +321,21 @@ These scripts automate the setup process by creating and activating the virtual 
 ====
 
 . Activate the Python Virtual Environment
-* Ensure that the virtual environment is activated in your shell.
-
+.. Ensure that the virtual environment is activated in your shell.
++
 . Start JupyterLab
-* Run the following command in the terminal
-
-  jupyter lab
-
-[start=3]
+.. Run the following command in the terminal
++
+[source, shell]
+----
+jupyter lab
+----
++
 . Access the Notebook
-* Jupyter Lab should launch automatically in your default web browser.
-** If it does not open automatically, navigate to: http://localhost:8888/lab[http://localhost:8888/lab]
-* Once JupyterLab opens, you should see the following interface
-
+.. Jupyter Lab should launch automatically in your default web browser.
+... If it does not open automatically, navigate to: http://localhost:8888/lab[http://localhost:8888/lab]
+.. Once JupyterLab opens, you should see the following interface
++
 [TIP]
 ====
 If you deployed the rvtool analysis tool in your bastion node, you could access it by forwarding the port using the following command:
@@ -316,21 +345,20 @@ If you deployed the rvtool analysis tool in your bastion node, you could access 
 ssh -L 8888:localhost:8888 lab-user@<bastion-node> -p <port>
 ----
 ====
-
++
 image::running_vma_tool_analysis/jupyter-notebook.png[title="", link=self, window=blank, width=100%]
-
-[start=4]
++
 . Select the Notebook
-* In the file explorer pane on the left, open `analyze-vm-inventory.ipynb`
-
+.. In the file explorer pane on the left, open `analyze-vm-inventory.ipynb`
++
 . Follow the Notebook Instructions
-* The notebook contains step-by-step guidance.
-** If the data has been prepared as described earlier, it should run automatically with minimal input.
-
+.. The notebook contains step-by-step guidance.
+... If the data has been prepared as described earlier, it should run automatically with minimal input.
++
 . Execute All Notebook Cells
-* Run all the cells in sequence.
-** The execution should take 60-90+ seconds, depending on the number of vCenter inventory files being processed.
-
+.. Run all the cells in sequence.
+... The execution should take 60-90+ seconds, depending on the number of vCenter inventory files being processed.
++
 image::running_vma_tool_analysis/run-the-jupyter-notebook.png[title="", link=self, window=blank, width=100%]
 
 [WARNING]
@@ -345,46 +373,38 @@ Set nrows to the total number of files + 1 (to account for the header row in the
 
 Once the RVTools data has been processed using the VMA-ANALYSIS Jupyter Notebook, the resulting insights will help in understanding the virtual infrastructure and planning migration strategies.
 
-.The analysis will provide:
+The analysis will provide:
 
 . Data Ingestion Verification
-
++
 image::running_vma_tool_analysis/data_ingestion.png[title="", link=self, window=blank, width=100%]
-
-[start=2]
++
 . Distribution of VMs per vCenter
-
++
 image::running_vma_tool_analysis/vm_per_vcenter.png[title="", link=self, window=blank, width=100%]
-
-[start=3]
++
 . Insights on resource utilization (for AEs love this info)
-
++
 image::running_vma_tool_analysis/consolidated_view.png[title="", link=self, window=blank, width=100%]
-
-[start=4]
++
 . VM / Host Scope Summary
-
++
 image::running_vma_tool_analysis/scope_summary.png[title="", link=self, window=blank, width=100%]
-
-[start=5]
++
 . Host Model Summary
-
++
 image::running_vma_tool_analysis/host_model.png[title="", link=self, window=blank, width=100%]
-
-[start=6]
++
 . Disk Usage Summary
-
++
 image::running_vma_tool_analysis/disk_summary.png[title="", link=self, window=blank, width=100%]
-
-[start=7]
++
 . Supported vs NonSupported OSes
-
-[start=8]
++
 . Estimated Migration Time
-
++
 image::running_vma_tool_analysis/migration.png[title="", link=self, window=blank, width=100%]
-
-[start=9]
++
 . and much, much more...
 
-Please feel free to explore the notebook and its outputs to gain a deeper understanding of the vSphere environment and contribute to the tool if possible.
+Please explore the notebook and its outputs to gain a deeper understanding of the vSphere environment and contribute to the tool if possible.
