@@ -1,5 +1,5 @@
 name: modules
-title: ETX Virtualization Delivery Bootcamp
+title: Virtualization VMA Super Lab
 version: master
 nav:
   - modules/ROOT/nav.adoc
