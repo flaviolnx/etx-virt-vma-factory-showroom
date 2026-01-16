@@ -484,6 +484,7 @@ Ensure that your OpenShift CLI has a valid and active token for the OpenShift cl
 oc whoami -t
 oc get pods -n openshift-ingress
 ----
+====
 
 A token for the session and the list of OpenShift Ingress pods should be returned. Otherwise, authenticate to OpenShift by running the following command:
 
@@ -507,7 +508,6 @@ cd $OPENSHIFT_VIRTUALIZATION_MIGRATION_REPO
 ----
 
 If you used `ansible-vault` to encrypt your password, you will need to add an additional parameter `--ask-vault-password` to the following command
-====
 
 [source,shell]
 ----
