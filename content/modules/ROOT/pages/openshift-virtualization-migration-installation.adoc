@@ -457,7 +457,7 @@ The VDDK image that has been referenced previously is available exclusively for 
 Tooling is available to help produce a VDDK image of your own using the licensed VMWare components that are provided by the customer which can be found in the following repository:
 
 link:https://github.com/rhpds/openshift-virtualization-vmware-vddk[VDDK]
-===
+====
 
 you can point to quay.io/andharri/vddk on your provider to obatin the vddk container instead to build one
 
@@ -507,7 +507,6 @@ cd $OPENSHIFT_VIRTUALIZATION_MIGRATION_REPO
 ----
 
 If you used `ansible-vault` to encrypt your password, you will need to add an additional parameter `--ask-vault-password` to the following command
-
 ====
 
 [source,shell]
