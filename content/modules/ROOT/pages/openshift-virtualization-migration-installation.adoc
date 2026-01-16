@@ -1,5 +1,8 @@
 # Installation of Ansible for OpenShift Virtualization Migration
 
+
+IMPORTANT: If you are using your machine, and doing ssh to bastion, remember to use tmux
+
 The Ansible for OpenShift Virtualization Migration is a set of Ansible based tooling, powered by Ansible Automation Platform (AAP), that simplifies the use of OpenShift Virtualization and focuses on three (3) primary areas:
 
 . Analyzing existing environments
@@ -21,6 +24,54 @@ In addition, the following will be provided for you:
 The process of deploying the Ansible for OpenShift Virtualization Migration makes use of Ansible on the local machine to prepare an instance of Ansible Automation Platform on OpenShift for use managing the lifecycle of Virtual Machines and OpenShift Virtualization. While several architectural patterns are available for deploying the Ansible for OpenShift Virtualization Migration, including configuring an existing instance of Ansible Automation Platform, you will use the tooling provided with the Ansible for OpenShift Virtualization Migration to deploy a new instance of Ansible Automation Platform to your single OpenShift environment.
 
 Utilize the following sections to deploy the Ansible for OpenShift Virtualization Migration by first installing any prerequisite software necessary on your machine and then configure the Ansible for OpenShift Virtualization Migration for use in your OpenShift environment.
+== create the vms to be migrated
+
+Log in your VMware environment using the following credentials:
+
+Vcenter URL:: {vcenter_url}
+Vcenter User:: {vcenter_user_name}
+Vcenter Password:: {vcenter_password}
+Vcenter Folder:: {vcenter_vm_folder}
+
+After your login, go to the Menu and then to Inventory.
+
+image::Ansible-image::Ansible-Migration-Install/vmware-inventory.png[link=self, window=blank, width=100%]
+
+Them go to Virtual Machines Icon, expand the templates folder, the RHEL folder and there you should see four templates.
+
+NOTE: On this lab you will use rhel9-tpl only.
+
+image::Ansible-image::Ansible-Migration-Install/vmware-inventory.png[link=self, window=blank, width=100%]
+
+On the *rhel9-tpl* use your right click and create a new VM from This template.
+
+image::Ansible-image::Ansible-Migration-Install/create-vm.png[link=self, window=blank, width=100%]
+
+Select the your folder: {vcenter_vm_folder}, name the vm to *rhel9-to-be-migrated-1* and click next.
+
+image::Ansible-image::Ansible-Migration-Install/vm-folder-select.png[link=self, window=blank, width=100%]
+
+Select one of three hosts, see the compatibility check in green and click next.
+
+image::Ansible-image::Ansible-Migration-Install/vm-esxi.png[link=self, window=blank, width=100%]
+
+Select one of DataStore locations, see the compatibility check in green and click next.
+
+image::Ansible-image::Ansible-Migration-Install/vm-storage.png[link=self, window=blank, width=100%]
+
+Mark the options *Customize this virtual machine's hardware* and *Power on virtual machine after creation* and click in next.
+
+image::Ansible-image::Ansible-Migration-Install/vm-options.png[link=self, window=blank, width=100%]
+
+Go to add new device, add a Network card adapter and click next.
+
+image::Ansible-image::Ansible-Migration-Install/vm-new-device.png[link=self, window=blank, width=100%]
+
+Finish the creation.
+
+IMPORTANT: Repeat this process more two times and name the vms as *rhel9-to-be-migrated-2* and *rhel9-to-be-migrated-3*
+
+
 
 == Local Machine Configuration
 
@@ -169,12 +220,6 @@ $ cd etx-virt_delivery
 ====
 The *ETX Workshop Git Repository* is the repository located at link:https://github.com/rhpds/etx-virt-vma-factory-showroom[https://github.com/rhpds/etx-virt-vma-factory-showroom] which will used again in the future exercise relating to xref:VMs-and-gitops.adoc[GitOps and Virtual Machines].
 ====
-+
-[source,console,subs="attributes",role=execute]
-----
-export ETX_REPO=/path/to/etx-workshop-repo
-----
-+
 [IMPORTANT]
 ====
 Be sure to replace `/path/to/etx-workshop-repo` with the location that you cloned previously. If the repository is not available on your machine, you can obtain the repository and configure the `ETX_REPO` environment variable by running the following commands:
@@ -187,6 +232,12 @@ cd etx-virt_delivery
 export ETX_REPO=$(pwd)
 ----
 ====
++
++
+[source,console,subs="attributes",role=execute]
+----
+export ETX_REPO=/path/to/etx-workshop-repo
+----
 +
 . Confirm that both the `OPENSHIFT_VIRTUALIZATION_MIGRATION_REPO` and `ETX_REPO` environment variables are set correctly by running the following command:
 +
@@ -405,7 +456,9 @@ The VDDK image that has been referenced previously is available exclusively for 
 Tooling is available to help produce a VDDK image of your own using the licensed VMWare components that are provided by the customer which can be found in the following repository:
 
 link:https://github.com/rhpds/openshift-virtualization-vmware-vddk[VDDK]
-====
+===
+
+you can point to quay.io/andharri/vddk on your provider to obatin the vddk container instead to build one
 
 === OpenShift Connectivity
 
@@ -438,6 +491,20 @@ A token for the session and the list of OpenShift Ingress pods should be returne
 oc login --insecure-skip-tls-verify=true -u ${openshift_cluster_admin_username} -p ${openshift_cluster_admin_password} ${openshift_api_server_url}
 ----
 
+Copy the aap manifest into the working directory
+
+[source,shell]
+----
+cp $ETX_REPO/aap-manifests.zip $OPENSHIFT_VIRTUALIZATION_MIGRATION_REPO
+----
+
+ensure that you are on your correct work directory:
+
+[source,shell]
+----
+cd $OPENSHIFT_VIRTUALIZATION_MIGRATION_REPO
+----
+
 If you used `ansible-vault` to encrypt your password, you will need to add an additional parameter `--ask-vault-password` to the following command
 
 ====
@@ -445,11 +512,11 @@ If you used `ansible-vault` to encrypt your password, you will need to add an ad
 [source,shell]
 ----
 ansible-navigator run \
-  --eei=quay.io/redhat-cop/openshift-virtualization-migration-ee:2.5 \
+  --eei=quay.io/rhpds/openshift-virtualization-migration-ee-2.5:v9 \
   -m stdout \
   --pp=missing \
-  --eev=$(pwd):/runner/project:Z \
-  --eev=$(pwd):/usr/share/ansible/collections/ansible_collections/infra/openshift_virtualization_migration:Z \
+  --eev=$OPENSHIFT_VIRTUALIZATION_MIGRATION_REPO:/runner/project:Z \
+  --eev=$OPENSHIFT_VIRTUALIZATION_MIGRATION_REPO:/usr/share/ansible/collections/ansible_collections/infra/openshift_virtualization_migration:Z \
   playbooks/migration_factory_aap.yml \
   -i inventory-etx-base.yml \
   -i inventory-etx.yml \
