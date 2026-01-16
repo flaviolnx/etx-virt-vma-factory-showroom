@@ -35,41 +35,41 @@ Vcenter Folder:: {vcenter_vm_folder}
 
 After your login, go to the Menu and then to Inventory.
 
-image::Ansible-image::Ansible-Migration-Install/vmware-inventory.png[link=self, window=blank, width=100%]
+image::Ansible-Migration-Install/vmware-inventory.png[link=self, window=blank, width=100%]
 
 Them go to Virtual Machines Icon, expand the templates folder, the RHEL folder and there you should see four templates.
 
 NOTE: On this lab you will use rhel9-tpl only.
 
-image::Ansible-image::Ansible-Migration-Install/vmware-inventory.png[link=self, window=blank, width=100%]
+image::Ansible-Migration-Install/vmware-inventory.png[link=self, window=blank, width=100%]
 
 On the *rhel9-tpl* use your right click and create a new VM from This template.
 
-image::Ansible-image::Ansible-Migration-Install/create-vm.png[link=self, window=blank, width=100%]
+image::Ansible-Migration-Install/create-vm.png[link=self, window=blank, width=100%]
 
 Select the your folder: {vcenter_vm_folder}, name the vm to *rhel9-to-be-migrated-1* and click next.
 
-image::Ansible-image::Ansible-Migration-Install/vm-folder-select.png[link=self, window=blank, width=100%]
+image::Ansible-Migration-Install/vm-folder-select.png[link=self, window=blank, width=100%]
 
 Select one of three hosts, see the compatibility check in green and click next.
 
-image::Ansible-image::Ansible-Migration-Install/vm-esxi.png[link=self, window=blank, width=100%]
+image::Ansible-Migration-Install/vm-esxi.png[link=self, window=blank, width=100%]
 
 Select one of DataStore locations, see the compatibility check in green and click next.
 
-image::Ansible-image::Ansible-Migration-Install/vm-storage.png[link=self, window=blank, width=100%]
+image::Ansible-Migration-Install/vm-storage.png[link=self, window=blank, width=100%]
 
 Mark the options *Customize this virtual machine's hardware* and *Power on virtual machine after creation* and click in next.
 
-image::Ansible-image::Ansible-Migration-Install/vm-options.png[link=self, window=blank, width=100%]
+image::Ansible-Migration-Install/vm-options.png[link=self, window=blank, width=100%]
 
 Go to add new device, add a Network card adapter and click next.
 
-image::Ansible-image::Ansible-Migration-Install/vm-new-device.png[link=self, window=blank, width=100%]
+image::Ansible-Migration-Install/vm-new-device.png[link=self, window=blank, width=100%]
 
 Finish the creation.
 
-IMPORTANT: Repeat this process more two times and name the vms as *rhel9-to-be-migrated-2* and *rhel9-to-be-migrated-3*
+IMPORTANT: Repeat this process more two times and name the vms as *rhel9-to-be-migrated-2* and *rhel9-to-be-migrated-3*.
 
 
 
@@ -219,7 +219,9 @@ $ cd etx-virt_delivery
 [TIP]
 ====
 The *ETX Workshop Git Repository* is the repository located at link:https://github.com/rhpds/etx-virt-vma-factory-showroom[https://github.com/rhpds/etx-virt-vma-factory-showroom] which will used again in the future exercise relating to xref:VMs-and-gitops.adoc[GitOps and Virtual Machines].
+
 ====
++
 [IMPORTANT]
 ====
 Be sure to replace `/path/to/etx-workshop-repo` with the location that you cloned previously. If the repository is not available on your machine, you can obtain the repository and configure the `ETX_REPO` environment variable by running the following commands:
@@ -232,7 +234,6 @@ cd etx-virt_delivery
 export ETX_REPO=$(pwd)
 ----
 ====
-+
 +
 [source,console,subs="attributes",role=execute]
 ----
